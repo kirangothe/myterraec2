@@ -21,13 +21,13 @@ pipeline {
 
         stage('Terraform Init') {
             steps {
-                sh 'cd terraformpipeline && terraform init'
+                sh 'terraform init'
             }
         }
 
         stage('Terraform Plan') {
             steps {
-                sh 'cd terraformpipeline && terraform plan -out=tfplan'
+                sh 'terraform plan -out=tfplan'
             }
         }
 
@@ -36,7 +36,7 @@ pipeline {
                 expression { params.autoApprove }
             }
             steps {
-                sh 'cd terraformpipeline && terraform apply -auto-approve tfplan'
+                sh 'terraform apply -auto-approve tfplan'
             }
         }
     }
